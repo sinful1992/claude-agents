@@ -252,23 +252,29 @@ export class LaunchPanel {
             <div class="dropdown-menu" id="model-menu"></div>
           </div>
         </div>
-        <div class="launch-body">
-          <textarea
-            id="prompt-input"
-            class="prompt-input"
-            placeholder="What will you launch?"
-            autofocus
-          ></textarea>
-          <div class="launch-footer">
-            <div class="model-chip" id="model-chip">
-              <span class="plus-icon">+</span>
-              <span id="model-chip-label">claude</span>
+        <div class="chat-input-container" id="launch-input-container">
+          <div class="chat-editor-container">
+            <textarea
+              id="prompt-input"
+              class="interactive-input-editor"
+              placeholder="What will you launch?"
+              autofocus
+            ></textarea>
+          </div>
+          <div class="chat-input-toolbars">
+            <div class="chat-input-toolbar">
+              <div class="model-chip" id="model-chip">
+                <span class="plus-icon">+</span>
+                <span id="model-chip-label">claude</span>
+              </div>
+              <label class="edit-auto-chip" title="Run with --dangerously-skip-permissions">
+                <input type="checkbox" id="edit-auto-checkbox">
+                <span>Edit Automatically</span>
+              </label>
             </div>
-            <label class="edit-auto-label" title="Run with --dangerously-skip-permissions">
-              <input type="checkbox" id="edit-auto-checkbox">
-              <span>Edit Automatically</span>
-            </label>
-            <button class="submit-btn" id="submit-btn" title="Launch (Ctrl+Enter)">↑</button>
+            <div class="chat-execute-toolbar">
+              <button class="submit-btn" id="submit-btn" title="Launch (Ctrl+Enter)">↑</button>
+            </div>
           </div>
         </div>
       </div>
