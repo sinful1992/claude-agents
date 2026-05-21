@@ -84,6 +84,10 @@ export class LaunchPanel {
       } else if (msg.type === 'getFiles') {
         const items = await readDirEntries(msg.path);
         this._panel.webview.postMessage({ type: 'files', parentPath: msg.path, items });
+      } else if (msg.type === 'showInfo') {
+        vscode.window.showInformationMessage(msg.message || '');
+      } else if (msg.type === 'openSettings') {
+        vscode.commands.executeCommand('workbench.action.openSettings', 'claudeAgents');
       } else if (msg.type === 'workspaceChanged') {
         const items = await readDirEntries(msg.workspacePath);
         this._panel.webview.postMessage({ type: 'fileRoot', workspacePath: msg.workspacePath, items });
@@ -263,7 +267,7 @@ export class LaunchPanel {
                 <input type="checkbox" id="edit-auto-checkbox">
                 <span>Auto</span>
               </label>
-              <button class="chip-settings-btn" title="Settings">⚙</button>
+              <button class="chip-settings-btn" id="chip-settings-btn" title="Settings">⚙</button>
               <div id="model-chip" style="display:none"><span id="model-chip-label"></span></div>
             </div>
             <div class="chat-execute-toolbar">

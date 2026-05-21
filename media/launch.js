@@ -431,6 +431,30 @@
     document.getElementById('prompt-input').focus();
   });
 
+  document.getElementById('add-context-btn').addEventListener('click', function () {
+    vscode.postMessage({ type: 'showInfo', message: 'File attachment coming soon.' });
+  });
+
+  document.getElementById('chip-settings-btn').addEventListener('click', function () {
+    vscode.postMessage({ type: 'openSettings' });
+  });
+
+  var defaultApprovalsBtn = document.querySelector('.default-approvals-btn');
+  var approvalLevels = ['Default Approvals', 'Auto Approve', 'Bypass Permissions'];
+  var currentApprovalIdx = 0;
+  if (defaultApprovalsBtn) {
+    defaultApprovalsBtn.addEventListener('click', function () {
+      currentApprovalIdx = (currentApprovalIdx + 1) % approvalLevels.length;
+      var label = defaultApprovalsBtn.querySelectorAll('span')[1];
+      if (label) label.textContent = approvalLevels[currentApprovalIdx];
+      if (approvalLevels[currentApprovalIdx] === 'Bypass Permissions') {
+        document.getElementById('edit-auto-checkbox').checked = true;
+      } else if (approvalLevels[currentApprovalIdx] === 'Default Approvals') {
+        document.getElementById('edit-auto-checkbox').checked = false;
+      }
+    });
+  }
+
   document.getElementById('refresh-sessions-btn').addEventListener('click', function () {
     vscode.postMessage({ type: 'refresh' });
   });

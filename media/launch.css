@@ -409,7 +409,7 @@ kbd {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .agents-area {
@@ -613,14 +613,13 @@ kbd {
   margin-top: 4px;
 }
 
-/* Left toolbar — chips row */
+/* Left toolbar — chips row. NO overflow:hidden — dropdowns open upward and must escape */
 .chat-input-toolbar {
   display: flex;
   align-items: center;
   gap: 2px;
   flex: 1;
   min-width: 0;
-  overflow: hidden;
   color: var(--vscode-icon-foreground);
 }
 
