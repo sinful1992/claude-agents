@@ -23,6 +23,9 @@ body {
   height: 100%;
   min-height: 0;
   overflow: hidden;
+  padding: 8px 8px 8px 0;
+  gap: 0;
+  box-sizing: border-box;
 }
 
 /* ── Left: Sessions column ──────────────────────────────── */
@@ -33,9 +36,11 @@ body {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--vscode-panel-border, rgba(128,128,128,0.15));
   overflow: hidden;
   background: var(--vscode-sideBar-background, var(--vscode-editor-background));
+  border-radius: 8px;
+  border: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.18));
+  margin: 0 4px 0 8px;
 }
 
 .sessions-col-header {
@@ -58,7 +63,7 @@ body {
 .icon-btn {
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: var(--vscode-cornerRadius-medium, 4px);
   color: var(--vscode-descriptionForeground);
   cursor: pointer;
   font-family: var(--vscode-font-family);
@@ -73,6 +78,11 @@ body {
 .icon-btn:hover {
   background: var(--vscode-toolbar-hoverBackground, rgba(128,128,128,0.14));
   border-color: var(--vscode-widget-border, rgba(128,128,128,0.18));
+}
+/* "New" button has a visible border to match VS Code agentsNewSessionButton */
+#new-session-btn {
+  border-color: var(--vscode-button-border, var(--vscode-widget-border, rgba(128,128,128,0.25)));
+  color: var(--vscode-foreground);
 }
 .icon-btn.icon-only { padding: 2px 5px; font-size: 13px; }
 
@@ -112,7 +122,7 @@ kbd {
   flex: 1;
   overflow-y: auto;
   min-height: 0;
-  padding: 0 6px;
+  padding: 4px 0;
 }
 
 /* ── VS Code agent-session-section (group headers) ───────── */
@@ -125,7 +135,7 @@ kbd {
   font-weight: 500;
   text-transform: uppercase;
   color: var(--vscode-descriptionForeground);
-  padding: 0 6px;
+  padding: 0 16px 0 14px;
   margin-top: 6px;
   min-height: 22px;
   letter-spacing: 0.04em;
@@ -146,7 +156,7 @@ kbd {
   gap: 6px;
   font-size: 12px;
   color: var(--vscode-descriptionForeground);
-  padding: 4px 6px;
+  padding: 4px 14px;
   cursor: pointer;
   user-select: none;
   opacity: 0.7;
@@ -166,11 +176,12 @@ kbd {
 .agent-session-item {
   display: flex;
   flex-direction: row;
-  padding: 8px 6px;
+  padding: 8px 8px;
+  margin: 0 6px;
   cursor: pointer;
   user-select: none;
   transition: background 0.1s;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 .agent-session-item:hover { background: var(--vscode-list-hoverBackground); }
 .agent-session-item.filtered-out { display: none; }
@@ -354,7 +365,7 @@ kbd {
   display: none;
   align-items: center;
   border: 1px solid var(--vscode-contrastBorder, var(--vscode-widget-border, rgba(128,128,128,0.18)));
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: var(--vscode-editor-background);
   padding: 4px 8px;
   margin-top: 4px;
@@ -398,7 +409,7 @@ kbd {
 }
 
 .agent-card-expanded .agent-session-item {
-  border-radius: 5px 5px 0 0;
+  border-radius: 6px 6px 0 0;
   background: var(--vscode-list-hoverBackground);
 }
 
@@ -410,6 +421,10 @@ kbd {
   flex-direction: column;
   min-width: 0;
   overflow: visible;
+  background: var(--vscode-editor-background);
+  border-radius: 8px;
+  border: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.18));
+  margin: 0 4px 0 0;
 }
 
 .agents-area {
@@ -573,8 +588,8 @@ kbd {
   box-sizing: border-box;
   cursor: text;
   background-color: var(--vscode-input-background);
-  border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: var(--vscode-cornerRadius-large, 6px);
+  border: 1px solid var(--vscode-input-border, rgba(128,128,128,0.25));
+  border-radius: 8px;
   padding: 0 6px 6px 6px;
   width: 100%;
   position: relative;
@@ -783,38 +798,50 @@ kbd {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--vscode-panel-border, rgba(128,128,128,0.15));
   overflow: hidden;
   background: var(--vscode-sideBar-background, var(--vscode-editor-background));
+  border-radius: 8px;
+  border: 1px solid var(--vscode-widget-border, rgba(128,128,128,0.18));
 }
 
 .right-tabs {
   display: flex;
   align-items: center;
   padding: 0 4px;
+  height: 35px;
   border-bottom: 1px solid var(--vscode-panel-border, rgba(128,128,128,0.12));
   flex-shrink: 0;
-  gap: 2px;
+  gap: 0;
+  background-color: var(--vscode-sideBar-background, var(--vscode-editor-background));
 }
 
+/* VS Code chat-composite-bar-tab pill style */
 .right-tab {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--vscode-descriptionForeground);
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 8px;
   cursor: pointer;
-  font-family: var(--vscode-font-family);
-  font-size: 12px;
-  padding: 6px 8px 5px;
-  transition: color 0.1s, border-color 0.1s;
   white-space: nowrap;
-  opacity: 0.7;
+  color: var(--vscode-descriptionForeground);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 22px;
+  height: 26px;
+  border-radius: 4px;
+  border: none;
+  background: rgba(128,128,128,0.05);
+  font-family: var(--vscode-font-family);
+  user-select: none;
+  transition: background 0.1s, color 0.1s;
 }
-.right-tab:hover { color: var(--vscode-editor-foreground); opacity: 1; }
+.right-tab:hover {
+  color: var(--vscode-editor-foreground);
+  background: var(--vscode-toolbar-hoverBackground, rgba(128,128,128,0.12));
+}
 .right-tab.active {
   color: var(--vscode-editor-foreground);
-  border-bottom-color: var(--vscode-focusBorder, var(--vscode-activityBarBadge-background, #0078d4));
-  opacity: 1;
+  background: var(--vscode-toolbar-activeBackground, rgba(128,128,128,0.14));
 }
 
 .right-tab-spacer { flex: 1; }
