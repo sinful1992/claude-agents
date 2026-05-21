@@ -1,0 +1,80 @@
+{
+  "name": "claude-agents",
+  "displayName": "Claude Agents",
+  "description": "Browse Claude Code session history and launch new agents",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:claudeAgents.sidebar",
+    "onCommand:claudeAgents.newSession",
+    "onCommand:claudeAgents.refresh"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claude-agents",
+          "title": "Claude Agents",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "claude-agents": [
+        {
+          "type": "webview",
+          "id": "claudeAgents.sidebar",
+          "name": ""
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "claudeAgents.newSession",
+        "title": "Claude: New Agent",
+        "icon": "$(add)"
+      },
+      {
+        "command": "claudeAgents.refresh",
+        "title": "Claude: Refresh Agents",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "claudeAgents.newSession",
+          "when": "view == claudeAgents.sidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "claudeAgents.refresh",
+          "when": "view == claudeAgents.sidebar",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "claudeAgents.newSession",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.41",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.9.3"
+  }
+}

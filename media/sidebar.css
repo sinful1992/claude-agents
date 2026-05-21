@@ -1,0 +1,263 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--vscode-sideBar-background);
+  color: var(--vscode-sideBar-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ── Section headers ────────────────────────────── */
+
+.section-header {
+  padding: 10px 12px 4px;
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.section-header.collapsible {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  opacity: 1;
+  padding-top: 9px;
+}
+.section-header.collapsible:hover { background: var(--vscode-list-hoverBackground); }
+
+/* ── Active agents ──────────────────────────────── */
+
+.agents-list {
+  flex-shrink: 0;
+  max-height: 40vh;
+  overflow-y: auto;
+  padding-bottom: 4px;
+}
+
+.agent-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 6px 12px 6px 9px;
+  cursor: pointer;
+  user-select: none;
+  border-left: 3px solid transparent;
+  transition: background 0.1s, border-color 0.15s;
+}
+.agent-item:hover { background: var(--vscode-list-hoverBackground); }
+
+.agent-item.status-running { border-left-color: #4ec94e; }
+.agent-item.status-waiting { border-left-color: #d4a017; }
+.agent-item.status-done    { border-left-color: rgba(128,128,128,0.25); }
+.agent-item.status-error   { border-left-color: #f14c4c; }
+
+/* dot kept in DOM but hidden — border-left carries the status signal */
+.status-dot { display: none; }
+
+.agent-info { min-width: 0; flex: 1; }
+
+.agent-task {
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.agent-description {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+  line-height: 1.3;
+  opacity: 0.85;
+}
+
+.agent-meta {
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 10px;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0.55;
+  margin-top: 3px;
+  letter-spacing: 0.02em;
+}
+
+/* Status badges inside agent-meta */
+.agent-status-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 0 4px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 5px;
+  opacity: 1;
+}
+
+.badge-running { color: #4ec94e; animation: blink 2s infinite; }
+.badge-waiting { color: #d4a017; animation: blink 1.4s infinite; }
+.badge-done    { color: var(--vscode-descriptionForeground); opacity: 0.55; }
+.badge-error   { color: #f14c4c; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Sessions ───────────────────────────────────── */
+
+.session-list {
+  overflow-y: auto;
+  max-height: 30vh;
+}
+
+.group-header {
+  padding: 8px 12px 2px;
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0.5;
+}
+
+.session-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.session-item:hover { background: var(--vscode-list-hoverBackground); }
+
+.more-row {
+  padding: 3px 12px 3px 20px;
+  color: var(--vscode-descriptionForeground);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 10px;
+  opacity: 0.45;
+  letter-spacing: 0.04em;
+  transition: opacity 0.1s;
+}
+.more-row:hover { opacity: 0.85; background: var(--vscode-list-hoverBackground); }
+
+.dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--vscode-activityBarBadge-background, #0078d4);
+  flex-shrink: 0;
+  margin-top: 6px;
+  opacity: 0.5;
+}
+
+.session-info { min-width: 0; flex: 1; }
+
+.session-title {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.session-time {
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 10px;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0.5;
+  margin-top: 1px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Customizations ─────────────────────────────── */
+
+.customizations-section {
+  flex-shrink: 0;
+  border-top: 1px solid var(--vscode-sideBarSectionHeader-border, rgba(128,128,128,0.13));
+  margin-top: 8px;
+}
+
+.customizations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vscode-sideBarSectionHeader-foreground);
+  user-select: none;
+  transition: background 0.1s;
+}
+.customizations-header.collapsible:hover { background: var(--vscode-list-hoverBackground); }
+
+.customizations-body { padding: 2px 0 6px; }
+
+.customization-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 12px;
+  transition: background 0.1s;
+}
+.customization-row:hover { background: var(--vscode-list-hoverBackground); }
+
+.customization-left { display: flex; align-items: center; gap: 8px; }
+.customization-icon { font-size: 13px; width: 16px; text-align: center; color: var(--vscode-descriptionForeground); opacity: 0.65; }
+.customization-label { font-size: 12px; }
+.customization-count {
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 10px;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0.6;
+  letter-spacing: 0.02em;
+}
+.customization-expandable { cursor: pointer; }
+.customization-expandable:hover { background: var(--vscode-list-hoverBackground); }
+.cust-chevron { font-size: 9px; }
+.customization-sublist { padding: 0 0 4px 36px; }
+.customization-subitem {
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  opacity: 0.75;
+  padding: 2px 12px 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── States ─────────────────────────────────────── */
+
+.empty-state {
+  padding: 10px 12px;
+  color: var(--vscode-descriptionForeground);
+  font-size: 12px;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.chevron {
+  color: var(--vscode-descriptionForeground);
+  font-size: 11px;
+  opacity: 0.55;
+}
