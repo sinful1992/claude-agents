@@ -236,46 +236,47 @@ export class LaunchPanel {
         </div>
       </div>
       <div class="launch-form">
-        <div class="launch-header">
-          <span class="header-label">New session in</span>
-          <div class="header-dropdown" id="workspace-dropdown">
-            <span class="folder-icon">⊡</span>
-            <span id="workspace-label">${escapeHtml(selectedDisplayName)}</span>
-            <span class="chevron">⌄</span>
-            <div class="dropdown-menu" id="workspace-menu"></div>
-          </div>
-          <span class="header-label">with</span>
-          <div class="header-dropdown" id="model-dropdown">
-            <span class="sparkle">✳</span>
-            <span id="model-label">Claude</span>
-            <span class="chevron">⌄</span>
-            <div class="dropdown-menu" id="model-menu"></div>
-          </div>
-        </div>
         <div class="chat-input-container" id="launch-input-container">
           <div class="chat-editor-container">
             <textarea
               id="prompt-input"
               class="interactive-input-editor"
-              placeholder="What will you launch?"
+              placeholder="Describe what to build"
               autofocus
             ></textarea>
           </div>
           <div class="chat-input-toolbars">
             <div class="chat-input-toolbar">
-              <div class="model-chip" id="model-chip">
-                <span class="plus-icon">+</span>
-                <span id="model-chip-label">claude</span>
+              <button class="chip-add-btn" id="add-context-btn" title="Add context">+</button>
+              <div class="header-dropdown" id="workspace-dropdown">
+                <span class="folder-icon">⊡</span>
+                <span id="workspace-label">${escapeHtml(selectedDisplayName)}</span>
+                <span class="chevron">↓</span>
+                <div class="dropdown-menu" id="workspace-menu"></div>
               </div>
-              <label class="edit-auto-chip" title="Run with --dangerously-skip-permissions">
+              <div class="header-dropdown" id="model-dropdown">
+                <span id="model-label">Agent</span>
+                <span class="chevron">↓</span>
+                <div class="dropdown-menu" id="model-menu"></div>
+              </div>
+              <label class="header-dropdown edit-auto-chip" title="Run with --dangerously-skip-permissions">
                 <input type="checkbox" id="edit-auto-checkbox">
-                <span>Edit Automatically</span>
+                <span>Auto</span>
               </label>
+              <button class="chip-settings-btn" title="Settings">⚙</button>
+              <div id="model-chip" style="display:none"><span id="model-chip-label"></span></div>
             </div>
             <div class="chat-execute-toolbar">
               <button class="submit-btn" id="submit-btn" title="Launch (Ctrl+Enter)">↑</button>
             </div>
           </div>
+        </div>
+        <div class="launch-secondary-row">
+          <button class="default-approvals-btn">
+            <span class="default-approvals-icon">⊙</span>
+            <span>Default Approvals</span>
+            <span class="chevron">↓</span>
+          </button>
         </div>
       </div>
     </div>

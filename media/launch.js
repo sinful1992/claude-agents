@@ -492,7 +492,12 @@
     const detailsRow = document.createElement('div');
     detailsRow.className = 'agent-session-details-row';
 
-    // Separator + status time (VS Code: status has has-separator for the · dot)
+    // Folder icon + time (matches VS Code's session details row)
+    const folderIcon = document.createElement('span');
+    folderIcon.className = 'agent-session-details-icon visible';
+    folderIcon.textContent = '⊡';
+    detailsRow.appendChild(folderIcon);
+
     const statusEl = document.createElement('div');
     statusEl.className = 'agent-session-status has-separator';
     const statusTime = document.createElement('span');
